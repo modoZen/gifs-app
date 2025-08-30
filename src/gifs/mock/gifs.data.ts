@@ -1,4 +1,6 @@
-export const gifsGokuDataMock = [
+import type { Gif } from "../interface/gif";
+
+export const gifsGokuDataMock: Gif[] = [
   {
     id: "WOb8EeFziTQNE02WXs",
     title: "Dragon Ball Super GIF by Toei Animation",

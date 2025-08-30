@@ -18,6 +18,7 @@ export const useGifs = () => {
 
     const gifs = await getGifsByQuery(term);
     setGifs(gifs);
+    gifsCache.current[term] = gifs;
   };
 
   const handleSearch = async (query: string) => {
@@ -26,14 +27,14 @@ export const useGifs = () => {
 
     if (workedQuery.length === 0) return;
     if (isDuplicated) return;
-    setPreviousTerms((prevTerms) => [workedQuery, ...prevTerms.splice(0, 8)]);
+    setPreviousTerms((prevTerms) => [workedQuery, ...prevTerms.splice(0, 7)]);
 
     const gifs = await getGifsByQuery(workedQuery);
     setGifs(gifs);
 
     gifsCache.current[workedQuery] = gifs;
 
-    console.log(gifsCache);
+    // console.log(gifsCache);
   };
 
   return { gifs, handleTerm, handleSearch, previousTerms };
