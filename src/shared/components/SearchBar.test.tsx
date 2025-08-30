@@ -96,4 +96,18 @@ describe("SearchBar tests", () => {
 
     expect(input).toBeInTheDocument();
   });
+
+  it("should call onSearch when press enter in the input with the correct value", () => {
+    const onSearchMock = vi.fn();
+    const query = "test";
+    render(<SearchBar onSearch={onSearchMock} />);
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.change(input, { target: { value: query } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    expect(onSearchMock).toHaveBeenCalledWith(query);
+    expect(onSearchMock).toHaveBeenCalledTimes(1);
+  });
 });
